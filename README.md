@@ -18,7 +18,6 @@ Start the Clordle game.
 Usage: clordle play [arguments]
 -h, --help    Print this usage information.
 -w, --word    The target word. Used for debugging.
-              (defaults to "CRANE")
 -m, --max     The max number of guesses/tries.
               (defaults to "6")
 
