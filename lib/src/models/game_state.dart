@@ -64,7 +64,7 @@ class GameState {
   /// When a guess is made, the word is evaluated and returns the appropiate
   /// [GameStatus].
   GameStatus guess(String guess) {
-    final word = Word.fromGuess(guess, wordle);
+    final word = Word.fromGuess(guess.toUpperCase(), wordle);
 
     _guesses.add(word);
 

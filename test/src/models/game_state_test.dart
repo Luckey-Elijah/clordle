@@ -21,12 +21,12 @@ void main() {
       expect(
         game.letterGuesses,
         equals(<Letter>{
-          const Letter(LetterState.close, 'w'),
-          const Letter(LetterState.close, 'o'),
-          const Letter(LetterState.close, 'r'),
-          const Letter(LetterState.close, 'd'),
-          const Letter(LetterState.close, 'l'),
-          const Letter(LetterState.miss, 'a')
+          const Letter(LetterState.close, 'W'),
+          const Letter(LetterState.close, 'O'),
+          const Letter(LetterState.close, 'R'),
+          const Letter(LetterState.close, 'D'),
+          const Letter(LetterState.close, 'L'),
+          const Letter(LetterState.miss, 'A')
         }),
       );
     });
