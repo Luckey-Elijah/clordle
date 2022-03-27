@@ -46,9 +46,9 @@ class Word extends Equatable {
 
 class GameState {
   GameState({
-    required this.wordle,
+    required String wordle,
     this.maxGuesses = 6,
-  });
+  }) : wordle = wordle.toUpperCase();
 
   List<Word> get guesses => _guesses;
   int get remainingTurns => maxGuesses - guesses.length;

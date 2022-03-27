@@ -6,6 +6,27 @@ A Wordle clone in the command line.
 
 ## Playing
 
+Show game options:
+
+```
+$ dart run clordle play --help
+```
+
+```
+Start the Clordle game.
+
+Usage: clordle play [arguments]
+-h, --help    Print this usage information.
+-w, --word    The target word. Used for debugging.
+              (defaults to "CRANE")
+-m, --max     The max number of guesses/tries.
+              (defaults to "6")
+
+Run "clordle help" to see global options.
+```
+
+Start playing:
+
 ```
 $ dart run clordle play
 ```
