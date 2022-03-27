@@ -9,7 +9,6 @@ class PlayCommand extends Command<ExitCode> {
       ..addOption(
         'word',
         abbr: 'w',
-        defaultsTo: 'CRANE',
         help: 'The target word. Used for debugging.',
       )
       ..addOption(
@@ -27,7 +26,7 @@ class PlayCommand extends Command<ExitCode> {
   @override
   ExitCode run() {
     final max = int.tryParse(_argResults['max'] as String) ?? _defaultGuesses;
-    final word = _argResults['word'] as String;
+    final word = _argResults['word'] as String? ?? getWord();
     final game = GameState(wordle: word, maxGuesses: max);
 
     while (_gameIsContinued(game)) {
