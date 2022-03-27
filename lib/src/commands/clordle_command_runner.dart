@@ -8,7 +8,7 @@ class ClordleCommandRunner extends CommandRunner<ExitCode> {
   })  : _logger = logger ?? Logger(),
         super(
           'clordle',
-          'A Wordle clone in the command line.',
+          'A Wordle clone built for the command line with Dart.',
         ) {
     addCommand(PlayCommand(_logger));
   }
