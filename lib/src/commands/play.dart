@@ -18,7 +18,10 @@ class PlayCommand extends Command<ExitCode> {
       logger
         ..write(gameboard(game.guesses).join('\n'))
         ..write('\n')
-        ..info('${game.remainingTurns} remain guesses.')
+        ..info(
+          '${game.remainingTurns} remain guess'
+          '${game.remainingTurns == 1 ? '' : 'es'}.',
+        )
         ..write(keyboard(playedLetters: game.letterGuesses).join('\n'))
         ..write('\n');
     }
