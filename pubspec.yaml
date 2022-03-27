@@ -1,6 +1,7 @@
 name: clordle
 description: A Wordle clone in the command line.
-version: 1.0.0
+version: 0.0.1-dev.1
+repository: https://github.com/Luckey-Elijah/clordle
 
 environment:
   sdk: '>=2.16.1 <3.0.0'
