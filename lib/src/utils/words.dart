@@ -1,3 +1,4 @@
+/// The list of all the possible game words.
 const words = [
   'women',
   'nikau',

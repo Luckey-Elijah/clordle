@@ -16,22 +16,44 @@ import 'package:clordle/clordle.dart';
 Iterable<String> keyboard({
   Iterable<Letter> playedLetters = const [],
 }) sync* {
-  final hits = playedLetters.where((letter) => letter.state == LetterState.hit);
+  final hits =
+      playedLetters.where((letter) => letter.status == LetterStatus.hit);
   final misses =
-      playedLetters.where((letter) => letter.state == LetterState.miss);
+      playedLetters.where((letter) => letter.status == LetterStatus.miss);
   final closes =
-      playedLetters.where((letter) => letter.state == LetterState.close);
+      playedLetters.where((letter) => letter.status == LetterStatus.close);
 
   const qwer = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
   const asdf = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
   const zxcv = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
-  final _qwer =
-      keyboardRow(qwer, hits: hits, misses: misses, closes: closes).join(' ');
-  final _asdf =
-      keyboardRow(asdf, hits: hits, misses: misses, closes: closes).join(' ');
-  final _zxcv =
-      keyboardRow(zxcv, hits: hits, misses: misses, closes: closes).join(' ');
+  final _qwer = keyboardRow(
+    qwer,
+    close,
+    hit,
+    miss,
+    hits: hits,
+    misses: misses,
+    closes: closes,
+  ).join(' ');
+  final _asdf = keyboardRow(
+    asdf,
+    close,
+    hit,
+    miss,
+    hits: hits,
+    misses: misses,
+    closes: closes,
+  ).join(' ');
+  final _zxcv = keyboardRow(
+    zxcv,
+    close,
+    hit,
+    miss,
+    hits: hits,
+    misses: misses,
+    closes: closes,
+  ).join(' ');
 
   yield '┌─────────────────────┐';
   yield '│ $_qwer │';
@@ -40,8 +62,12 @@ Iterable<String> keyboard({
   yield '└─────────────────────┘';
 }
 
+/// Generates a single row for [keyboard].
 Iterable<String> keyboardRow(
-  Iterable<String> letters, {
+  Iterable<String> letters,
+  String Function(String) close,
+  String Function(String) hit,
+  String Function(String) miss, {
   Iterable<Letter> hits = const <Letter>[],
   Iterable<Letter> misses = const <Letter>[],
   Iterable<Letter> closes = const <Letter>[],
