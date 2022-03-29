@@ -1,6 +1,6 @@
 name: clordle
 description: A Wordle clone built for the command line with Dart. Have fun!
-version: 0.0.1-dev.2
+version: 0.0.1-dev.3
 repository: https://github.com/Luckey-Elijah/clordle
 
 environment:
