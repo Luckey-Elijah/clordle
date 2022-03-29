@@ -1,68 +1,39 @@
-import 'package:equatable/equatable.dart';
+import 'package:clordle/clordle.dart';
 
-enum LetterState { hit, miss, close, unmatched }
-
-enum GameStatus { win, loss, cont }
-
-class Letter extends Equatable {
-  const Letter(this.state, this.character);
-
-  final LetterState state;
-  final String character;
-
-  @override
-  List<Object> get props => [state, character];
-}
-
-class Word extends Equatable {
-  const Word(this.letters);
-
-  factory Word.fromGuess(String guess, String wordle) =>
-      Word(letterMapper(guess, wordle).toList());
-
-  final List<Letter> letters;
-
-  bool get isMatch => letters.every((l) => l.state == LetterState.hit);
-
-  @override
-  List<Object> get props => letters;
-
-  static Iterable<Letter> letterMapper(String guess, String wordle) sync* {
-    final guessLetters = guess.split('');
-    final wordleLetters = wordle.split('');
-
-    for (var i = 0; i < guessLetters.length; i++) {
-      final gLetter = guessLetters[i];
-      if (gLetter == wordleLetters[i]) {
-        yield Letter(LetterState.hit, gLetter);
-      } else if (wordle.contains(gLetter)) {
-        yield Letter(LetterState.close, gLetter);
-      } else {
-        yield Letter(LetterState.miss, gLetter);
-      }
-    }
-  }
-}
-
+/// {@template game_state}
+/// The state of a given game.
+/// {@endtemplate}
 class GameState {
+  /// {@macro game_state}
   GameState({
     required String wordle,
     this.maxGuesses = 6,
   }) : wordle = wordle.toUpperCase();
 
+  /// All the previously guessed words.
   List<Word> get guesses => _guesses;
+
+  /// The number of turns remaining in this game.
   int get remainingTurns => maxGuesses - guesses.length;
 
+  /// A set of all the letters that have been play. Useful for creating a
+  /// keyboard state.
   Set<Letter> get letterGuesses =>
       _guesses.expand<Letter>((w) => w.letters).toSet();
 
   final List<Word> _guesses = [];
+
+  /// The goal word that is too be guessed.
   final String wordle;
+
+  /// The maximum number of guesses allowed in this game.
   final int maxGuesses;
+
+  /// This game's current status.
   late GameStatus status;
 
-  /// When a guess is made, the word is evaluated and returns the appropiate
-  /// [GameStatus].
+  /// When a guess is made, the word is evaluated and returns the appropriate
+  /// [GameStatus]. [status] is also updated when this method is invoked.
   GameStatus guess(String guess) {
     final word = Word.fromGuess(guess.toUpperCase(), wordle);
 

@@ -1,8 +1,3 @@
-import 'dart:math';
-
-import 'package:clordle/clordle.dart';
-
-String getWord() {
-  final index = Random().nextInt(words.length);
-  return words[index];
-}
+/// Select the word from [words] using the selector.
+String getWord(List<String> words, int Function(int) selector) =>
+    words[selector(words.length)];

@@ -38,4 +38,6 @@ Start playing:
 clordle play
 ```
 
-![Gameplay of world - A Wordle clone in the command line.](assets/gameplay.png)
+# Demo
+
+![Gameplay of world - A Wordle clone in the command line.](assets/demo.gif)

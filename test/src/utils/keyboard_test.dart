@@ -47,4 +47,40 @@ void main() {
       expect(kboard.contains(letter), isTrue);
     }
   });
+
+  test('keyboardRow', () {
+    String _nil(String _) => _;
+    expect(
+      keyboardRow(
+        ['Q'],
+        _nil,
+        _nil,
+        _nil,
+        closes: [const Letter(LetterStatus.unmatched, 'Q')],
+      ).join(),
+      'Q',
+    );
+
+    expect(
+      keyboardRow(
+        ['Q'],
+        _nil,
+        _nil,
+        _nil,
+        misses: [const Letter(LetterStatus.unmatched, 'Q')],
+      ).join(),
+      'Q',
+    );
+
+    expect(
+      keyboardRow(
+        ['Q'],
+        _nil,
+        _nil,
+        _nil,
+        hits: [const Letter(LetterStatus.unmatched, 'Q')],
+      ).join(),
+      'Q',
+    );
+  });
 }

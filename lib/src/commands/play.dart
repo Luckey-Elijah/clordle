@@ -1,60 +1,40 @@
-import 'package:args/args.dart';
+import 'dart:math';
+
 import 'package:args/command_runner.dart';
 import 'package:clordle/clordle.dart';
 import 'package:mason_logger/mason_logger.dart';
 
+/// {@template play_command}
+/// Entry point to the `play` sub-command.
+/// {@endtemplate}
 class PlayCommand extends Command<ExitCode> {
-  PlayCommand(this.logger) {
-    argParser
-      ..addOption(
-        'word',
-        abbr: 'w',
-        help: 'The target word. Used for debugging.',
-      )
-      ..addOption(
-        'max',
-        abbr: 'm',
-        defaultsTo: '6',
-        help: 'The max number of guesses/tries.',
-      );
-  }
+  /// {@macro play_command}
+  PlayCommand(this._logger, [List<String> seed = words]) : _words = seed;
 
-  final Logger logger;
-  static const _defaultGuesses = 6;
-  ArgResults get _argResults => argResults!;
+  final Logger _logger;
+  final List<String> _words;
 
   @override
   ExitCode run() {
-    final max = int.tryParse(_argResults['max'] as String) ?? _defaultGuesses;
-    final word = _argResults['word'] as String? ?? getWord();
-    final game = GameState(wordle: word, maxGuesses: max);
+    final word = getWord(_words, Random().nextInt);
+    final game = GameState(wordle: word);
 
-    while (_gameIsContinued(game)) {
-      logger
+    while (gameShouldContinue(game, _logger.prompt)) {
+      _logger
         ..write(gameboard(game.guesses).join('\n'))
         ..write('\n')
-        ..info(
-          '${game.remainingTurns} remain guess'
-          '${game.remainingTurns == 1 ? '' : 'es'}.',
-        )
+        ..info(remainingGuessesLabel(game.remainingTurns))
         ..write(keyboard(playedLetters: game.letterGuesses).join('\n'))
         ..write('\n');
     }
 
     if (game.status == GameStatus.win) {
-      logger.success('You won!');
+      _logger.success('You won!');
     } else {
-      logger.err('You lost! The word was ${game.wordle}');
+      _logger.err('You lost! The word was ${game.wordle}');
     }
 
     return ExitCode.success;
-  }
-
-  bool _gameIsContinued(GameState game) {
-    return game.guess(
-          logger.prompt('GUESS:').toUpperCase().padRight(5).substring(0, 5),
-        ) ==
-        GameStatus.cont;
   }
 
   @override

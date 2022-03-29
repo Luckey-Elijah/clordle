@@ -27,7 +27,7 @@ Iterable<String> gameboard(Iterable<Word> words) sync* {
       throw Exception('The word must be 5 chars long.');
     }
 
-    yield gameboardRow(word).join();
+    yield gameboardRow(word, close, hit).join();
   }
 
   yield '└───┴───┴───┴───┴───┘';
@@ -40,13 +40,17 @@ Iterable<String> gameboard(Iterable<Word> words) sync* {
 /// assert(row == '│ W │ O │ R │ D │ S │');
 /// ```
 /// The word can be any length. A empty string will create a single `'│'`.
-Iterable<String> gameboardRow(Word word) sync* {
+Iterable<String> gameboardRow(
+  Word word,
+  String Function(String) close,
+  String Function(String) hit,
+) sync* {
   yield '│';
 
   for (final letter in word.letters) {
-    if (letter.state == LetterState.hit) {
+    if (letter.status == LetterStatus.hit) {
       yield ' ${hit(letter.character)} │';
-    } else if (letter.state == LetterState.close) {
+    } else if (letter.status == LetterStatus.close) {
       yield ' ${close(letter.character)} │';
     } else {
       yield ' ${letter.character} │';
