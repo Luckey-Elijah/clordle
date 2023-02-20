@@ -23,12 +23,12 @@ Iterable<String> keyboard({
   final closes =
       playedLetters.where((letter) => letter.status == LetterStatus.close);
 
-  const qwer = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
-  const asdf = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
-  const zxcv = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
+  const qwerRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'];
+  const asdfRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'];
+  const zxcvRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M'];
 
-  final _qwer = keyboardRow(
-    qwer,
+  final qwer = keyboardRow(
+    qwerRow,
     close,
     hit,
     miss,
@@ -36,8 +36,8 @@ Iterable<String> keyboard({
     misses: misses,
     closes: closes,
   ).join(' ');
-  final _asdf = keyboardRow(
-    asdf,
+  final asdf = keyboardRow(
+    asdfRow,
     close,
     hit,
     miss,
@@ -45,8 +45,8 @@ Iterable<String> keyboard({
     misses: misses,
     closes: closes,
   ).join(' ');
-  final _zxcv = keyboardRow(
-    zxcv,
+  final zxcv = keyboardRow(
+    zxcvRow,
     close,
     hit,
     miss,
@@ -56,9 +56,9 @@ Iterable<String> keyboard({
   ).join(' ');
 
   yield '┌─────────────────────┐';
-  yield '│ $_qwer │';
-  yield '│  $_asdf  │';
-  yield '│    $_zxcv    │';
+  yield '│ $qwer │';
+  yield '│  $asdf  │';
+  yield '│    $zxcv    │';
   yield '└─────────────────────┘';
 }
 

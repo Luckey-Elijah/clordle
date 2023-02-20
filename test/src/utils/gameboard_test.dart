@@ -59,28 +59,28 @@ void main() {
   });
 
   test('[gameboardRow] generates a row', () {
-    String _nil(String _) => _;
+    String nil(String _) => _;
     final fiveUnmatchedX = Word(
       List.generate(5, (_) => const Letter(LetterStatus.unmatched, 'X')),
     );
 
-    var actual = gameboardRow(fiveUnmatchedX, _nil, _nil).join();
+    var actual = gameboardRow(fiveUnmatchedX, nil, nil).join();
     expect(actual, '│ X │ X │ X │ X │ X │');
 
-    actual = gameboardRow(const Word([]), _nil, _nil).join();
+    actual = gameboardRow(const Word([]), nil, nil).join();
     expect(actual, '│');
 
     actual = gameboardRow(
       const Word([Letter(LetterStatus.hit, 'X')]),
-      _nil,
-      _nil,
+      nil,
+      nil,
     ).join();
     expect(actual, '│ X │');
 
     actual = gameboardRow(
       const Word([Letter(LetterStatus.close, 'X')]),
-      _nil,
-      _nil,
+      nil,
+      nil,
     ).join();
     expect(actual, '│ X │');
   });

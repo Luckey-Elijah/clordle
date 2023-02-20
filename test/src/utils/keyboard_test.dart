@@ -49,13 +49,13 @@ void main() {
   });
 
   test('keyboardRow', () {
-    String _nil(String _) => _;
+    String nil(String _) => _;
     expect(
       keyboardRow(
         ['Q'],
-        _nil,
-        _nil,
-        _nil,
+        nil,
+        nil,
+        nil,
         closes: [const Letter(LetterStatus.unmatched, 'Q')],
       ).join(),
       'Q',
@@ -64,9 +64,9 @@ void main() {
     expect(
       keyboardRow(
         ['Q'],
-        _nil,
-        _nil,
-        _nil,
+        nil,
+        nil,
+        nil,
         misses: [const Letter(LetterStatus.unmatched, 'Q')],
       ).join(),
       'Q',
@@ -75,9 +75,9 @@ void main() {
     expect(
       keyboardRow(
         ['Q'],
-        _nil,
-        _nil,
-        _nil,
+        nil,
+        nil,
+        nil,
         hits: [const Letter(LetterStatus.unmatched, 'Q')],
       ).join(),
       'Q',
